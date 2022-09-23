@@ -91,20 +91,12 @@ export class App extends Component {
 
 export const App1 = () => {
   const [filter, setFilter] = useState('');
-  // const [contacts, setContacts] = useState([
-  //   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-  //   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-  //   { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-  //   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  // ]);
 
   const [contacts, setContacts] = useState(() => {
-    const contacts = localStorage.getItem('contacts1');
+    const contact = localStorage.getItem('contacts1');
     try {
-      const parsedContacts = JSON.parse(contacts);
-
-      if (parsedContacts) {
-        console.log('DID_MOUNT=>>>>', contacts);
+      if (contact) {
+        const parsedContacts = JSON.parse(contact);
         return parsedContacts;
       }
       return [
@@ -117,23 +109,9 @@ export const App1 = () => {
       console.log(error);
     }
   });
+
   useEffect(() => {
-    console.log('DID__UPDATE=>>>>', contacts);
     localStorage.setItem('contacts1', JSON.stringify(contacts));
-  }, [contacts]);
-
-  useEffect(() => {
-    const contacts = localStorage.getItem('contacts1');
-    try {
-      const parsedContacts = JSON.parse(contacts);
-
-      if (parsedContacts) {
-        console.log('DID_MOUNT=>>>>555', contacts);
-        setContacts(parsedContacts);
-      }
-    } catch (error) {
-      console.log(error);
-    }
   }, [contacts]);
 
   const onInputContact = user => {
