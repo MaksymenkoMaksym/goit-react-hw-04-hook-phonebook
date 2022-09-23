@@ -98,11 +98,6 @@ export const App1 = () => {
   //   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
   // ]);
 
-  // useEffect(() => {
-  //   console.log('DID__UPDATE=>>>>', contacts);
-  //   localStorage.setItem('contacts1', JSON.stringify(contacts));
-  // }, [contacts]);
-
   const [contacts, setContacts] = useState(() => {
     const contacts = localStorage.getItem('contacts1');
     try {
@@ -122,20 +117,24 @@ export const App1 = () => {
       console.log(error);
     }
   });
+  useEffect(() => {
+    console.log('DID__UPDATE=>>>>', contacts);
+    localStorage.setItem('contacts1', JSON.stringify(contacts));
+  }, [contacts]);
 
   useEffect(() => {
     const contacts = localStorage.getItem('contacts1');
     try {
-      const parcedConacts = JSON.parse(contacts);
+      const parsedContacts = JSON.parse(contacts);
 
-      if (parcedConacts) {
-        console.log('DID_MOUNT=>>>>', contacts);
-        setContacts(parcedConacts);
+      if (parsedContacts) {
+        console.log('DID_MOUNT=>>>>555', contacts);
+        setContacts(parsedContacts);
       }
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [contacts]);
 
   const onInputContact = user => {
     if (contacts.some(contact => contact.name === user.name)) {
