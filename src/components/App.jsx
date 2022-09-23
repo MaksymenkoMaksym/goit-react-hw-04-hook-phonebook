@@ -131,7 +131,6 @@ export const App1 = () => {
     const res = contacts.filter(contact =>
       contact.name.toLocaleLowerCase().includes(name)
     );
-    console.log(res);
     setFilter(res);
   };
 
